@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Endless Training</title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/game.css">
+    <script type="text/javascript" src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
+    
+    <!--<script type="text/javascript" src="js/decimal.js"></script>
+	<script type="text/javascript" src="js/numberformat.js"></script>
+	<script type="text/javascript" src="js/jquery-v-3-0-0.js"></script>
+	<script type="text/javascript" src="js/angular-1-5-6.js"></script>
+	<script type="text/javascript" src="js/angular-1-5-6-routes.js"></script>-->
+</head>
+<body>
+	<div class="bdy-container" data-ng-app="endlessTraining">
+		<div id="ig" style="padding:5px;" class="game-container">
+			<div>
+				<img src="images/LoadingScreen.jpg" width="980px" height="550px">
+			</div>
+		</div>
+		<div style="display:none;" id="gc" class="game-container">
+			<div class="main-cnt" data-ng-controller="game">
+				<div class="left-main-cnt">
+					<div class="tab">
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Rebirth')">Rebirth</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Fights')">Fights</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Shop')">Shop</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Conquer')">Conquer</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Achievements')">Achievements</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Settings')">Settings</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'FAQ')">FAQ's</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'Changelog')">Changelog</button>
+					  <button class="tablinks" onclick="$(this).openTab(event, 'OverallStats')">Overall Stats</button>
+					</div>
+
+					<!-- ==================================================================================================== -->
+					<!-- =======================================    PLAYER STATISTICS    ==================================== -->
+					<!-- ==================================================================================================== -->
+					<div class="text1-headers xcentered">
+						Current Player Statistics
+					</div>
+					<div class="stats-overview">
+						ID: 123123123 <br>
+						Name: Boart2k <br>
+						Exp: {{rscurrentexptxt}} <br>
+						EPS: {{rsDPStxt}} <br>
+						Ability: {{rsAbilityTxt}} <span id="abChange" class="green">=> ({{tempAbilityTxt}})</span><br>
+						Fight Wins: <br><br>
+
+						HP: {{rshptxt}} <span id="hpChange" class="green">=> ({{temphptxt}})</span><br>
+
+						HP Regen: {{rshpregentxt}} <span id="hpregenChange" class="green">=> ({{temphpregentxt}})</span><br>
+
+						Damage: {{rsdamagetxt[0]}}-{{rsdamagetxt[1]}} <span id="puChange" class="green">=> ({{tempdamagemintxt}}-{{tempdamagemaxtxt}})</span><br>
+
+						Damage Range Reduction: {{rsFormBonusTxt%1==0?rsFormBonusTxt:rsFormBonusTxt.toFixed(3)}}% <span id="formChange" class="green">=> ({{tempformbonustxt%1==0?tempformbonustxt:tempformbonustxt.toFixed(3)}}%)</span><br>
+
+						Attack Speed: {{rsattackspeed%1==0?rsattackspeed:rsattackspeed.toFixed(3)}} <span id="speedChange" class="green">=> ({{tempattackspeed%1==0?tempattackspeed:tempattackspeed.toFixed(3)}})</span><br>
+
+						Critcal Chance: {{rscritchance%1==0?rscritchance:rscritchance.toFixed(3)}}% <span id="critpChange" class="green">=> ({{tempcritchance%1==0?tempcritchance:tempcritchance.toFixed(3)}})</span><br>
+
+						Critical Damage: x{{rscritdamage%1==0?rscritdamage:rscritdamage.toFixed(3)}} <br>
+
+						Dodge Rate: {{rsdodgetxt}} <span id="dodgeChange" class="green">=> ({{tempdodgetxt}})</span><br>
+
+						Block Rate: {{rsblocktxt}} <span id="blockChange" class="green">=> ({{tempblocktxt}})</span><br>
+
+						Hit Rate: {{rshitratetxt}} <span id="formChange" class="green">=> ({{temphitratetxt}})</span><br>
+
+						Toughness: {{rstoughnesstxt}} <span id="hpChange" class="green">=> ({{temptoughnesstxt}})</span><br>
+					</div>
+				</div>
+				<div class="left-main-cnt">
+					<div class="game-header-stats">
+						<div class="game-header-cnt">
+							Diamonds: 123123213
+						</div>
+						<div class="game-header-cnt">
+							Exp: {{rscurrentexptxt}}
+						</div>
+						<div class="game-header-cnt">
+							EPS: {{rsDPStxt}}
+						</div>
+						<div class="game-header-cnt">
+							Cash: $0
+						</div>
+					</div>
+					<!--<div style="position: fixed; left: 5px; top: 95px; display: block;">
+					
+					<img id="bbi" style="display: inline-block;" src="images/bbi.gif" width="20" height="20"/>
+					<img id="ohbi" style="display: inline-block;" src="images/ohbi.gif" width="20" height="20"/>
+					<img id="lbbi" style="display: inline-block;" src="images/lbbi.gif" width="20" height="20"/>
+					</div>-->
+					<canvas id="damageDisplay" style="position: fixed; left: 329px; top: 80px; width: 320px; height: 370px;"></canvas>
+					<img data-ng-src="{{mysource}}" width="320px" height="370"/><br>
+					<span style="color: white; font-size: 12px">{{localstorage}}{{date}}</span>
+					<span style="color: white; font-size: 12px"></span>
+				</div>
+				<div class="left-main-cnt">
+					<div class="game-header-stats">
+						<div class="joijadsf">
+							<div class="text1-headers xcentered">
+									Convert
+							</div>
+							<p>Convert your accumulated experience into attribute points. 1k exp = 1 attribute point.</p>
+							<div style="margin:10px;">
+								<div class="btn btn-primary boxed dib" data-ng-click="convert()" ng-mouseover="convertShow('e')" ng-mouseleave="convertShow('g')">Convert Experience</div><br>
+							</div>
+							<div class="text1-subheaders">
+									Attribute Points: {{rsattributepointstxt}} <span id="attrRed" class="red">(-{{suttAttributePoints}})</span> <span id="attrBlue" class="green">(+{{rsattributepointstogaintxt}})</span>
+							</div>
+							<div class="text1-subheaders">
+									Upgrade Multiplier (x{{rsStatUpgradeMulTxt}}) <span class="tts" data-toggle="tooltip" title="To reset multiplier just press x1 button">&nbsp;?&nbsp;</span>
+							</div>
+							<div class="stats-menu btn-group">
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul(1)">x1</div>
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul(10)">x10</div>
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul(100)">x100</div>
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul(1000)">x1k</div>
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul(1000000)">x1M</div>
+								<div class="btn btn-primary boxed multiplier-btn" data-ng-click="xStatMul('all')">All</div>
+							</div><br><br>
+							<div class="stat-cnt">
+								<div class="stat-col1">
+									<div class="stat">
+										Power <span class="tts" data-toggle="tooltip" title="Increase minimum damage by 1 and maximum damage by 100">&nbsp;?&nbsp;</span>: {{rsstatpowertxt}}
+									</div>
+									<div class="stat">
+										Endurance <span class="tts" data-toggle="tooltip" title="Increase hp by 100 and toughness by 10, toughness reduces damage taken">&nbsp;?&nbsp;</span>: {{rsstatendurancetxt}}
+									</div>
+									<div class="stat">
+										Resting <span class="tts" data-toggle="tooltip" title="Increase hp regen by 1">&nbsp;?&nbsp;</span>: {{rsstatrestingtxt}}
+									</div>
+									<div class="stat">
+										Speed <span class="tts" data-toggle="tooltip" title="Increase attack speed during trainings, increase damage by 100% per attack speed during battles">&nbsp;?&nbsp;</span>: {{rsstatspeedtxt}}
+									</div>
+									<div class="stat">
+										Dodge <span class="tts" data-toggle="tooltip" title="Increase dodge rate by 1, dodge gives the chance to evade an attack causing it to miss">&nbsp;?&nbsp;</span>: {{rsstatdodgetxt}}
+									</div>
+									<div class="stat">
+										Block <span class="tts" data-toggle="tooltip" title="Increase block rate by 2, block gives the chance to block an attack reducing damage by 80%">&nbsp;?&nbsp;</span>: {{rsstatblocktxt}}
+									</div>
+									<div class="stat">
+										Form <span class="tts" data-toggle="tooltip" title="Decrease the gap between minimum and maximum damage. Hard cap is 99%. Increase hit rate by 1, hit rate increases the chance of hitting an enemy">&nbsp;?&nbsp;</span>: {{rsstatformtxt}}
+									</div>
+									<div class="stat">
+										Crit Chance <span class="tts" data-toggle="tooltip" title="Increase critical hit chance. Hard cap is 75%">&nbsp;?&nbsp;</span>: {{rsstatcritptxt}}
+									</div>
+									<div class="stat">
+										Crit Damage <span class="tts" data-toggle="tooltip" title="Increase critical damage">&nbsp;?&nbsp;</span>: {{rsstatcritdmgtxt}}
+									</div>
+								</div>
+								<div class="stat-col2">
+									<div>
+										<div class="btn btn-primary boxed plus" data-ng-click="addStats('power')" ng-mouseover="statUpgradeHover('power','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+									<div>
+										<div class="btn btn-primary boxed plus" data-ng-click="addStats('endurance')" ng-mouseover="statUpgradeHover('endurance','e')" ng-mouseleave="statUpgradeHover('endurance','g')">+</div>
+									</div>
+									<div>
+										<div class="btn btn-primary boxed plus" data-ng-click="addStats('resting')" ng-mouseover="statUpgradeHover('resting','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+									<div>
+										<div id="speedStatUpgrade" class="btn btn-primary boxed plus" data-ng-click="addStats('speed')" ng-mouseover="statUpgradeHover('speed','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+									<div>
+										<div class="btn btn-primary boxed plus" data-ng-click="addStats('dodge')" ng-mouseover="statUpgradeHover('dodge','e')" ng-mouseleave="statUpgradeHover('dodge','g')">+</div>
+									</div>
+									<div>
+										<div class="btn btn-primary boxed plus" data-ng-click="addStats('block')" ng-mouseover="statUpgradeHover('block','e')" ng-mouseleave="statUpgradeHover('block','g')">+</div>
+									</div>
+									<div>
+										<div id="formStatUpgrade" class="btn btn-primary boxed plus" data-ng-click="addStats('form')" ng-mouseover="statUpgradeHover('form','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+									<div>
+										<div id="critChanceStatUpgrade" class="btn btn-primary boxed plus" data-ng-click="addStats('crit chance')" ng-mouseover="statUpgradeHover('critp','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+									<div>
+										<div id="critDamageStatUpgrade" class="btn btn-primary boxed plus" data-ng-click="addStats('crit damage')" ng-mouseover="statUpgradeHover('critd','e')" ng-mouseleave="statUpgradeHover('power','g')">+</div>
+									</div>
+								</div>
+							</div>
+							
+							<div id="statUpgradeToolTip" class="stats-overview">
+								You need {{suttAttributePoints}} attribute points to upgrade {{suttStat}} {{suttMul}} times.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	<!-- ALL SCRIPTS GO HERE https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js-->
+	
+	<script type="text/javascript" src="js/angular-1-5-6.js"></script>
+	<script type="text/javascript" src="js/decimal.js"></script>
+    <script type="text/javascript" src="js/numberformat.js"></script>
+    <script type="text/javascript" src="js/jquery-v-3-0-0.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular-1-5-6-routes.js"></script>
+    <script type="text/javascript" src="https://download.playfab.com/PlayFabClientApi.js"></script>
+
+	
+    <script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/gamefactory.js"></script>
+	<script type="text/javascript" src="js/gameroutes.js"></script>
+	<script type="text/javascript">
+		var username = "";
+		/*kongregateAPI.loadAPI(function(){
+		  window.kongregate = kongregateAPI.getAPI();
+		  // You can now access the Kongregate API with:
+		  // kongregate.services.getUsername(), etc
+		  // Proceed with loading your game...
+		  username = window.kongregate.services.getUsername();
+		  //console.log('Kongregate username changed to: ' + window.kongregate.services.getUsername());
+		});*/
+
+		/*window.kongregate.services.addEventListener('login', function(){
+		  username = window.kongregate.services.getUsername();
+		 });*/
+
+
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+    		
+			$.fn.openTab = function(evt, tabName) 
+    		{
+			    // Declare all variables
+			    var i, tabcontent, tablinks;
+
+			    // Get all elements with class="tabcontent" and hide them
+			    tabcontent = document.getElementsByClassName("tabcontent");
+			    for (i = 0; i < tabcontent.length; i++) 
+			    {
+			        tabcontent[i].style.display = "none";
+			    }
+
+			    // Get all elements with class="tablinks" and remove the class "active"
+			    tablinks = document.getElementsByClassName("tablinks");
+			    for (i = 0; i < tablinks.length; i++) 
+			    {
+			        tablinks[i].className = tablinks[i].className.replace(" active", "");
+			    }
+
+			    // Show the current tab, and add an "active" class to the button that opened the tab
+			    document.getElementById(tabName).style.display = "block";
+			    evt.currentTarget.className += " active";
+			    if(tabName=="Achievements")
+			    {
+			    	$('#achievementNotification').hide();
+			    }
+			}
+
+    		console.log('Game Ready');
+    		//console.log(username);
+		});
+
+	</script>
+</body>
+</html>

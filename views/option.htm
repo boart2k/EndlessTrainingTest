@@ -1,0 +1,23 @@
+<div class="view-container">
+	<span style="font-size: 20px;">Game Version: v1.0.9.0</span><br><br>
+	<span style="font-size: 20px;">Export/Import Save</span><br>
+	<!--<div ng-click="save()">Click Me To Save</div>-->
+	<input type="text" name="xexportsave" style="width:100%; background: transparent;" data-ng-change="loadImportSave()" ng-model="$root.playerSaveData"><br>
+	<span>Endless Training uses HTML5 Local Storage to save your progress. In order to secure your progress export your game data and save it in a text file. You can copy that code and put it in the textbox below to import your data.</span><br>
+	<span style="font-size: 20px;">Warning!</span><br>
+	<span>Make sure you export your data into a textfile before clearing your browsers history/cache. Clearing your history/cache before exporting your game data will result in data loss.</span><br><br>
+	<span style="font-size: 20px;">Number Format ({{numberNotation}})</span><br>
+	<div class="stats-menu btn-group" style="width: 400px;">
+		<div class="btn btn-primary boxed numberformat-btn" data-ng-click="changeNumberNotation('Standard')">Standard</div>
+		<div class="btn btn-primary boxed numberformat-btn" data-ng-click="changeNumberNotation('Scientific')">Scientific</div>
+		<div class="btn btn-primary boxed numberformat-btn" data-ng-click="changeNumberNotation('Engineering')">Engineering</div>
+	</div><br><br>
+	<span style="font-size: 20px;">Hard Reset</span><br>
+	<span>Please type "confirm" in the textbox below and press the Hard Reset Button</span><br>
+	<input style="width:100%; background: transparent;" type="text" name="hrdrst" ng-model="$root.confirmHardReset"><br>
+	<div class="btn btn-primary boxed" ng-click="hardReset()">Hard Reset</div> <br><br>
+	<span style="font-size: 20px;">Disable Floating Damage Numbers: ({{disablefloatingnumbers==true?"True":"False"}})</span><br>
+	<div id="dfloatn" class="btn btn-primary boxed" ng-click="disable('dfloatn')">Disable Damage Floating Numbers</div> <br><br>
+	<span style="font-size: 20px;">Disable Animation: ({{disableanimation==true?"True":"False"}})</span><br>
+	<div id="dfloatn" class="btn btn-primary boxed" ng-click="disable('anim')">Disable Damage Floating Numbers</div> <br><br>
+</div>

@@ -1,0 +1,18 @@
+<div class="view-container">
+	<span style="font-size: 20px;">Speed ({{rsstatspeedtxt}})</span><br>
+	<span>Each point in speed increases attack speed and gives attack piercing.</span><br>
+	<span>Maximum attack speed is 10 attacks per second.</span><br>
+	<span>Attack Piercing means you can level up a number of levels at the same time if your damage is high enough to cover 2 or more levels at the same time. In order to get more attack piercing I suggest you invest more and more in speed to find out.</span><br>
+	<span>Maximum Levels Peirced on overkill is {{rsattackspeedPierce+rsSkillAPPoints}}.</span><br>
+	<span>Next AP in {{rsNextAp}} speed points.</span><br>
+	<div class="stats-menu btn-group">
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1,'speed')">x1</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(10,'speed')">x10</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(100,'speed')">x100</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1000,'speed')">x1k</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('10%','speed')">10%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('20%','speed')">20%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('50%','speed')">50%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('100%','speed')">100%</div>
+	</div>
+</div>

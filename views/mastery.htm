@@ -1,0 +1,15 @@
+<div class="view-container">
+	<span style="font-size: 20px;">Mastery ({{rsstatmasterytxt}})</span><br>
+	<span>Each point in mastery increases attribute point gain by 1.</span><br>
+	<span>1 mastery requires {{rsMasteryRequirementstxt}} attribute points.</span><br>
+	<div class="stats-menu btn-group">
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1,'mastery')">x1</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(10,'mastery')">x10</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(100,'mastery')">x100</div>
+		<!--<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1000,'mastery')">x1k</div>-->
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('10%','mastery')">10%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('20%','mastery')">20%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('50%','mastery')">50%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('100%','mastery')">100%</div>
+	</div>
+</div>

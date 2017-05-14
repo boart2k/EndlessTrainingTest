@@ -1,0 +1,112 @@
+<div class="view-container">
+	<span style="font-size: 20px;">Rebirth ({{rsrebirthstxt}}) ({{rsrebirthmultxt}}%)</span><br>
+	<span>Rebirth you go back from where you started but you retain all the stats so you can grow faster and stronger.</span><br>
+	<span>Resets the levels and increases damage by {{rsascensionbonustorebirthtxt}}% (x{{rsascensions+1}} bonus).</span><br>
+	<span>Required Levels to Rebirth: {{rsnextrebirthtxt}}</span><br>
+	<input type="text" name="rebirthCondition" ng-model="canRebirth" style="display: none;">
+	<div ng-class="canRebirth == 'true' ? 'btn btn-primary boxed dib' : 'btn btn-primary disabled boxed dib'" data-ng-click="rebirth()">Rebirth</div>
+	<div id="progressBarContainer" style="display: none;">
+		<div class="progress">
+			<span>Auto Rebirth in {{ARTimer}} {{minSec}}</span>
+		  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="ARP" 
+		  	aria-valuemin="0" aria-valuemax="100" ng-style="{'width' : ARP+'%'}"></div>
+		</div>
+	</div>
+	<br>
+	<div id="rankup" style="display:none;">
+		<span style="font-size: 20px;">Class Rank Up ({{rsweightclass[rsrank]}}) ({{rsrankmultxt}}%)</span><br>
+		<span>Increase your rank by going to the next weight class.</span><br>
+		<span>Ranking up increases damage by 100%.</span><br>
+		<span>Required Rebirths to Rank Up: {{rsnextrankuptxt}}</span><br>
+		<input type="text" name="rankUpCondition" ng-model="canRankUp" style="display: none;">
+		<div ng-class="canRankUp == 'true' ? 'btn btn-primary boxed' : 'btn btn-primary disabled boxed'" data-ng-click="rankUp()">Rank Up</div>
+	</div>
+	<br>
+	<br>
+	<div id="ascension" style="display: none;">
+		<span style="font-size: 20px;">Ascension ({{rsascensionstxt}})</span><br>
+		<span>Now that you are the champion no one in this dimension is a match to you. To get futher challenges you need to move to another dimension. Moving to another dimension is diffcult. You will have to start again from scratch but your experiences in this dimension will remain thus giving you a head start in the next dimension. But be warned each dimension has it's own weight class requirements.</span><br>
+		<span>Ascending resets everything but gives you 2 ascension skill points and increases rebirth damage bonus multipler.</span><br>
+		<span>You need to be the Champion in order to ascend.</span><br>
+		<input type="text" name="ascensionCondition" ng-model="canAscend" style="display: none;">
+		<div ng-class="canAscend == 'true' ? 'btn btn-primary boxed' : 'btn btn-primary disabled boxed'" data-ng-click="ascend()">Ascend</div><br><br>
+		<span style="font-size: 20px;">Ascension Skills Points ({{rsascensionskillpoints}})</span><br>
+		
+		<div class="stats-menu btn-group">
+			<div class="btn btn-primary boxed ascension-btn" data-ng-click="showSkill('damage')">Damage</div>
+			<div class="btn btn-primary boxed ascension-btn" data-ng-click="showSkill('speed')">Speed</div>
+			<div class="btn btn-primary boxed ascension-btn" style="width: 110px;" data-ng-click="showSkill('ap')">Attack Pierce</div>
+			<div class="btn btn-primary boxed ascension-btn" data-ng-click="showSkill('crit')">Crit</div>
+			<div class="btn btn-primary boxed ascension-btn" style="width: 80px;" data-ng-click="showSkill('rebirth')">Rebirths</div>
+		</div>
+		<div class="ascensionskillscnt">
+			<div class="ascensionskills" id="damageskill" style="display: block;">
+				<span style="font-size: 20px;">Damage Skill ({{rsSkillDamagePoints}})</span><br>
+				<span>Each point in damage skill multiplies your damage by 10</span><br>
+				<span>Current Damage Multiplier: x{{rsskilldamagemultxt}}</span><br>
+				<div class="btn btn-primary boxed" ng-click="upgradeSkill('damage')">Upgrade</div><br><br>
+				<span>Note: Maximum level of the advance skill is dependent on the basic skill. If your basic skill is level 2 then you can only upgrade advance skill to level 2.</span><br><br>
+				<span style="font-size: 20px;">Berserk ({{rsSkillBerserkPoints}})</span><br>
+				<span>Each point in berserk skill gives you a 0.1% chance per hit to enter into a berserker rage which will give you maximum damage for 10 seconds (Effects CANNOT be stacked).</span><br>
+				<span>Current Berserk Trigger Chance: {{(rsSkillBerserkPoints/10)*rsOverheatBuff}}%</span><br>
+				<div class="btn btn-primary boxed" ng-click="upgradeSkill('berserk')">Upgrade</div>
+			</div>
+			<div class="ascensionskills" id="speedskill" style="display: none;">
+				<span style="font-size: 20px;">Speed Skill ({{rsSkillSpeedPoints}})</span><br>
+				<span>Each point in speed skill increases base attack speed by 1</span><br>
+				<span>Current Base Attack Speed: {{rsSkillSpeedPoints+1}}</span><br>
+				<span>Capped At 9!</span><br>
+				<div id="speedskillupgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('speed')">Upgrade</div><br><br>
+				<span>Note: Maximum level of the advance skill is dependent on the basic skill. If your basic skill is level 2 then you can only upgrade advance skill to level 2. If you've capped the basic skill you can now add as many skill points into the advance skill</span><br><br>
+				<span style="font-size: 20px;">Overheat ({{rsSkillOverheatPoints}})</span><br>
+				<span>Each point in overheat gives you a 0.1% chance per hit to double the chances of triggering all other advance skills for 30 seconds.</span><br>
+				<span>Current Overheat Trigger Chance: {{rsSkillOverheatPoints/10}}%</span><br>
+				<div id="speedskillupgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('overheat')">Upgrade</div><br><br>
+			</div>
+			<div class="ascensionskills" id="apskill" style="display: none;">
+				<span style="font-size: 20px;">Attack Piercing Skill ({{rsSkillAPPoints}})</span><br>
+				<span>Each point in attack piercing skill increases maximum levels pierced by 1</span><br>
+				<span>Current Attack Piercing: {{rsattackspeedPierce+rsSkillAPPoints+rsLevelBreakerBuff}}</span><br>
+				<span>Capped At 20!</span><br>
+				<div id="apskillupgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('ap')">Upgrade</div><br><br>
+				<span>Note: Maximum level of the advance skill is dependent on the basic skill. If your basic skill is level 2 then you can only upgrade advance skill to level 2. If you've capped the basic skill you can now add as many skill points into the advance skill</span><br><br>
+				<span style="font-size: 20px;">Level Breaker ({{rsSkillLevelBreakerPoints}})</span><br>
+				<span>Each point in level breaker gives you a 0.1% chance per hit to enter into a god like state which will allow you to sweep through 500 levels per hit in 10 seconds (Effects CANNOT be stacked, Note: This is like an advance attack piercing).</span><br>
+				<span>Current Level Breaker Trigger Chance: {{(rsSkillLevelBreakerPoints/10)*rsOverheatBuff}}%</span><br>
+				<div class="btn btn-primary boxed" ng-click="upgradeSkill('levelbreaker')">Upgrade</div><br><br>
+			</div>
+			<div class="ascensionskills" id="critskill" style="display: none;">
+				<span style="font-size: 20px;">Crit Skill {{rsSkillCritPoints}}</span><br>
+				<span>Each point in crit skill increases base critical chance by 1%</span><br>
+				<span>Current Base Critical Chance: {{rsSkillCritPoints+1}}%</span><br>
+				<span>Capped At 49!</span><br>
+				<div id="critskillupgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('crit')">Upgrade</div><br><br>
+				<span>Note: To put points in lucky strike you need level 5 Crit Skill.</span><br><br>
+				<span style="font-size: 20px;">Lucky Strike ({{rsSkillLuckyStrikePoints}})</span><br>
+				<span>Each point in lucky strike gives you a 0.01% chance per hit to get an additional 1 ascension skill point.</span><br>
+				<span>Capped At 1!</span><br>
+				<span>Current Lucky Strike Trigger Chance: {{(rsSkillLuckyStrikePoints/100)*rsOverheatBuff}}%</span><br>
+				<div id="luckystrikeskillupgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('luckystrike')">Upgrade</div><br><br>
+			</div>
+			<div class="ascensionskills" id="rebirthskill" style="display: none;">
+				<span style="font-size: 20px;">Note: These skills only works if your rebirth requirement is satisfied.</span><br><br>
+				<span style="font-size: 20px;">Timed Auto Rebirth ({{rsSkillTimedAutoRebirthPoints}})</span><br>
+				<span>Gives you the ability to rebirth every 10 minutes! Each point in this skill reduces the time by 30 seconds.</span><br>
+				<span>Capped at level 20!</span><br>
+				<span>Current Auto Rebirth Time: {{rsSkillAutoRebirthTimeTxt}} {{rsSkillAutoRebirthTimeTxtMinSec}}</span><br>
+				<div id="timeAutoRebirthSkillUpgrade" class="btn btn-primary boxed" ng-click="upgradeSkill('timedAutoRebirth')">Upgrade</div><br><br>
+				<span>Note: Maximum level of the advance skill is dependent on the basic skill.</span><br><br>
+				<span style="font-size: 20px;">Chanced Auto Rebirth ({{rsSkillChancedAutoRebirthPoints}})</span><br>
+				<span>Each point in Chanced Auto Rebirth gives you a 0.01% chance per hit to auto rebirth.</span><br>
+				<span>Current Auto Rebirth Trigger Chance: {{(rsSkillChancedAutoRebirthPoints/100)*rsOverheatBuff}}%</span><br>
+				
+				<div class="btn btn-primary boxed" ng-click="upgradeSkill('chancedAutoRebirth')">Upgrade</div>
+				
+			</div>
+		</div>
+		<span style="font-size: 20px;">Ascension Reset Skills <div class="btn btn-primary boxed" data-ng-click="resetSkills()">Reset</div></span><br>
+		<span>Ascension Resets Left: {{10-rsascensionresetpoints}}</span><br>
+		<span>Note: You can only reset up to 10 times so use them carefully!</span><br>
+	</div>
+	<br><br>
+</div>

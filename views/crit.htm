@@ -1,0 +1,30 @@
+<div class="view-container">
+	<span style="font-size: 20px;">Critical Hit Chance % ({{rsstatcritptxt}})</span><br>
+	<span>Each point in critical hit chance increases the chance to land a critical hit.</span>
+	<span>Maximum Critical Hit Chance is 50%.</span><br>
+	<span>Next critical chance in {{rsNextCritChance}} critical hit chance points.</span><br>
+	<div id="critchancebuttongroup" class="stats-menu btn-group">
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1,'crit chance')">x1</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(10,'crit chance')">x10</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(100,'crit chance')">x100</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1000,'crit chance')">x1k</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('10%','crit chance')">10%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('20%','crit chance')">20%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('50%','crit chance')">50%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('100%','crit chance')">100%</div>
+	</div>
+	<hr style="border-color: black;">
+	<span style="font-size: 20px;">Critical Hit Damage ({{rsstatcritdmgtxt}})</span><br>
+	<span>Each point in critical hit damage increases the damage multiplier when you land a critical hit.</span><br>
+	<span>Crit Damage = (Round(Critical Hit Damage Stat^(1/10)))+1</span>
+	<div class="stats-menu btn-group">
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1,'crit damage')">x1</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(10,'crit damage')">x10</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(100,'crit damage')">x100</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats(1000,'crit damage')">x1k</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('10%','crit damage')">10%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('20%','crit damage')">20%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('50%','crit damage')">50%</div>
+		<div class="btn btn-primary boxed multiplier-btn" data-ng-click="addStats('100%','crit damage')">100%</div>
+	</div>
+</div>
